@@ -7,11 +7,15 @@ endif()
 add_library(core STATIC
     core/Application.cpp
     core/Log.cpp
+    utils/Clock.cpp          # time system utility
+    platform/Platform.cpp
 )
 
 target_include_directories(core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/core
+    ${CMAKE_CURRENT_SOURCE_DIR}/utils   # expose utility header
+    ${CMAKE_CURRENT_SOURCE_DIR}/platform
 )
 
 # Link external dependencies for core

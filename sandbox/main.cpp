@@ -20,7 +20,9 @@ protected:
         return true;
     };
 
-    virtual bool OnUpdate(float ts) override {
+    virtual bool OnUpdate(f64 ts) override {
+        // ts is delta time since last frame in seconds
+        //LOG_TRACE("[TestApp::OnUpdate] delta={} run={}", ts, GetRunTime());
         return true;
     };
 

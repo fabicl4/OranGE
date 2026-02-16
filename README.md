@@ -182,9 +182,9 @@ $ cmake .. && cmake --build .
 - [x] Engine as static library
 - [x] Set up GitHub repo (what you are seeing :))
 - [x] Logging system
-- [ ] Window system (GLFW abstraction)
+- [x] Window system (GLFW abstraction)
 - [ ] Event system (input, window events)
-- [ ] Time system (delta time, timers)
+- [x] Time system (delta time, timers)
 - [ ] Main loop
 - [ ] Application class with subsystem lifecycle
 
