@@ -1,9 +1,12 @@
 #pragma once
 
-#include "defines.h"
+#include <defines.h>
 
 #include <platform/Platform.h>
+#include <platform/Event.h>
 #include "../utils/Clock.h" // time measurement helper
+
+namespace OranGE {
 
 struct ApplicationConfig
 {
@@ -16,9 +19,8 @@ struct ApplicationConfig
 
 class Application {
 public:
-
-    Application(const ApplicationConfig& config) 
-        : m_Config(config) {}
+    //Application() {};
+    Application(const ApplicationConfig& config);
     
     virtual ~Application() = default;
 
@@ -31,7 +33,7 @@ protected:
     // ts: time step / delta time in seconds since last update
     virtual bool OnUpdate(f64 ts) { return true; };
     virtual bool OnRender() { return true; };
-    //virtual void OnEvent() {};
+    void OnEvent(Event& e);
 
     // helpers for derived classes
     f64 GetRunTime() const { return m_Clock.GetElapsed(); }
@@ -56,9 +58,15 @@ private:
         return dt;
     }
 
+private:
+    // event handling
+    bool OnWindowResize(WindowResizeEvent& e);
+
 protected:
     ApplicationConfig m_Config;
     Platform m_Platform;
-    
+
     Window* m_CurrWindow = nullptr;
+};
+
 };

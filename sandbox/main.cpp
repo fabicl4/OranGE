@@ -1,11 +1,11 @@
 #include <iostream>
 
-#include <core/Application.h>
-#include <core/Log.h>
+#include <OranGE-Core.h>
 
-class TestApp : public Application {
+class TestApp : public OranGE::Application {
 public:
-    TestApp(const ApplicationConfig& config) : Application(config) {};
+    TestApp(const OranGE::ApplicationConfig& config) 
+        : Application(config) {};
 
 protected:
     virtual bool OnCreate() override {
@@ -41,7 +41,8 @@ private:
 
 int main() 
 {
-    ApplicationConfig config;
+    OranGE::ApplicationConfig config;
+
     config.title = std::string("Test App");
     config.width = 800;
     config.height = 600;

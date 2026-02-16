@@ -2,7 +2,9 @@
 
 #include <spdlog/sinks/stdout_color_sinks.h>
 
-namespace Log
+using namespace OranGE;
+
+namespace OranGE::Log
 {
     void Init() {
         spdlog::set_pattern("%^[%T] %n: %v%$");
@@ -14,5 +16,7 @@ namespace Log
         s_Logger->set_level(level);
     }
 
-    void Shutdown() {}
+    void Shutdown() {
+        spdlog::shutdown();
+    }
 }

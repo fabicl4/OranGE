@@ -5,6 +5,7 @@ if (NOT TARGET spdlog::spdlog)
 endif()
 
 add_library(core STATIC
+    defines.cpp             # for global definitions like export macros and common includes
     core/Application.cpp
     core/Log.cpp
     utils/Clock.cpp          # time system utility

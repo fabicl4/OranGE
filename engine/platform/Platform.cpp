@@ -4,6 +4,8 @@
 
 #include <core/Log.h>
 
+namespace OranGE {
+
 //-------------------------------------------------------------------------------
 // WINDOW
 //-------------------------------------------------------------------------------
@@ -140,3 +142,5 @@ void Platform::PollEvents()
 Platform::GLProcLoader Platform::GetGLLoadingFunction() {
     return (GLProcLoader)glfwGetProcAddress;
 };
+
+} // namespace OranGE

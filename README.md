@@ -183,10 +183,10 @@ $ cmake .. && cmake --build .
 - [x] Set up GitHub repo (what you are seeing :))
 - [x] Logging system
 - [x] Window system (GLFW abstraction)
-- [ ] Event system (input, window events)
+- [x] Event system (input, window events) (Basic implementation, need more work)
 - [x] Time system (delta time, timers)
-- [ ] Main loop
-- [ ] Application class with subsystem lifecycle
+- [x] Main loop
+- [x] Application class with subsystem lifecycle
 
 ### Phase 1: Render Hardware Interface
 
