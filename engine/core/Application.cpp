@@ -2,6 +2,12 @@
 
 #include "Log.h"
 
+namespace OranGE {
+
+Application::Application(const ApplicationConfig& config)
+    : m_Config(config)
+{}
+
 bool Application::Init() {
     // logging
     Log::Init();
@@ -26,7 +32,8 @@ bool Application::Init() {
     m_CurrWindow->SetOnResizeCallback(
         [this](uint32_t width, uint32_t height)
         {
-            LOG_TRACE("[Application]Window resized: {}x{}", width, height);
+            //LOG_TRACE("[Application]Window resized: {}x{}", width, height);
+            OnEvent(WindowResizeEvent(width, height));
             //m_Device->SetViewport(width, height);
             //m_Renderer->OnWindowResize(width, height);
         }
@@ -79,3 +86,19 @@ bool Application::Run() {
     return Shutdown();
     
 }
+
+bool Application::OnWindowResize(WindowResizeEvent& e)
+{
+    LOG_TRACE("[Application::OnWindowResize]Window resized: {}x{}", e.GetWidth(), e.GetHeight());
+    return true;
+}
+
+void Application::OnEvent(Event& e)
+{
+    EventDispatcher dispatcher(e);
+    dispatcher.Dispatch<WindowResizeEvent>([this](WindowResizeEvent& e) {
+        return this->OnWindowResize(e);
+    });
+}
+
+} // namespace OranGE

@@ -1,11 +1,13 @@
 #pragma once
 
-#include <core/defines.h>
-
-// Platform-specific code and utilities
+#include <defines.h>
 
 // Forward declarations
 struct GLFWwindow;
+
+namespace OranGE
+{
+// Platform-specific code and utilities
 
 struct WindowProps {
     std::string title;
@@ -78,3 +80,4 @@ private:
 };
 
 
+} // namespace OranGE
