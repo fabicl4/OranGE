@@ -2,6 +2,9 @@
 
 #include "Log.h"
 
+#include "../renderer/Device.h"
+#include "../renderer/Renderer.h"
+
 namespace OranGE {
 
 Application::Application(const ApplicationConfig& config)
@@ -26,6 +29,17 @@ bool Application::Init() {
     }
 
     m_CurrWindow->MakeContextCurrent();
+
+    m_Device = new gfx::Device(/* enable validation= */true);
+    m_Device->Init(Window::GetGLLoadingFunction());
+
+    m_Renderer = new gfx::Renderer(m_Device, 
+        gfx::Viewport{0,0, m_Config.width, m_Config.height}
+    );
+
+    // create resource managers
+    m_ShaderManager = new ShaderManager(m_Device);
+    m_TextureManager = new TextureManager(m_Device);
 
     //-------------------------------------------------------------------------
     // Set event callbacks
@@ -74,7 +88,14 @@ bool Application::Run() {
         // update clock and compute delta time since last frame
         f64 dt = CalculateDelta();
 
-        OnRender();
+        {
+            m_Renderer->BeginFrame();
+
+            OnRender();
+
+            m_Renderer->EndFrame();
+        }
+
         OnUpdate(dt);
 
         m_CurrWindow->SwapBuffers();

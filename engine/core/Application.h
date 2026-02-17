@@ -4,9 +4,17 @@
 
 #include <platform/Platform.h>
 #include <platform/Event.h>
+
 #include "../utils/Clock.h" // time measurement helper
 
+#include <render/Renderer.h>
+
+#include <resources/Resource.h>
+
 namespace OranGE {
+
+// Forward declaration of Device class to avoid being included in main.cpp
+class Device;
 
 struct ApplicationConfig
 {
@@ -64,9 +72,19 @@ private:
 
 protected:
     ApplicationConfig m_Config;
-    Platform m_Platform;
 
+    Platform m_Platform;    // OS surface, events and window management
     Window* m_CurrWindow = nullptr;
+
+    Window* m_Window;       
+    gfx::Renderer* m_Renderer;   // Issues rendering commands
+    gfx::Device* m_Device;       // Owns GPU driver interface + capabilities
+    gfx::GLContext* m_Context;   // Logical OpenGL context for state management
+
+    // Resource managers
+    //BufferManager m_BufferManager;
+    ShaderManager* m_ShaderManager;
+    TextureManager* m_TextureManager;
 };
 
 };
