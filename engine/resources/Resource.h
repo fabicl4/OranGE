@@ -2,14 +2,18 @@
 
 #include "defines.h"
 
-#include "Texture.h"
-#include "Shader.h"
-
-// Forward declaration of Device class to avoid circular dependency
-class Device;
+#include <core/Log.h>
 
 namespace OranGE {
 
+// Base for all resources (e.g. shaders, textures, meshes, etc.)
+// https://giordi91.github.io/post/resourcesystem/
+
+// Forward declaration of Device class to avoid circular dependency
+namespace gfx {
+class Device;
+};
+    
 template<typename T>
 class Handle 
 {
@@ -19,7 +23,7 @@ public:
 
     u32 GetId() const { return id; }
     u32 GetGeneration() const { return generation; }
-    bool IsValid() const { return id != 0; }
+    bool IsValid() const { return generation != 0; }
 
     bool operator==(const Handle& other) const {
         return id == other.id && generation == other.generation;
@@ -41,6 +45,7 @@ public:
         u32 id;
 
         if (!m_FreeSlots.empty()) {
+
             id = m_FreeSlots.back();
             m_FreeSlots.pop_back();
 
@@ -91,42 +96,9 @@ public:
 private:
 
     std::vector<T> m_Resource;
-    std::vector<int> m_Generations;
+    std::vector<u32> m_Generations;
     std::vector<u32> m_FreeSlots;
 };
 
-typedef Handle<Shader> ShaderHandle;
-typedef Handle<Texture> TextureHandle;
-typedef Handle<Buffer> BufferHandle;
 
-//typedef HandleManager<Buffer> BufferManager;
-
-class TextureManager : public HandleManager<Texture> 
-{
-public:
-    TextureManager(Device* device) : m_Device(device) {}
-    // Additional texture-specific management functions can be added here
-    // e.g. loading textures from files, generating mipmaps, etc.
-
-    Handle<Texture> LoadTextureFromFile(const char* filePath);
-
-private:
-    Device* m_Device; // for texture creation and resource management
-};
-
-class ShaderManager : public HandleManager<Shader> 
-{
-public:
-    // Additional shader-specific management functions can be added here
-    // e.g. compiling shaders from source, handling shader variants, etc.
-
-    ShaderManager(Device* device) : m_Device(device) {}
-
-    Handle<Shader> CreateShaderFromSource(const char* vertexSrc, const char* fragmentSrc);
-    Handle<Shader> CreateShaderFromFiles(const char* vertexPath, const char* fragmentPath);
-
-private:
-    Device* m_Device; // for shader compilation and resource management
-};
-    
-}
+} // namespace OranGE

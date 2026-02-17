@@ -2,6 +2,8 @@
 
 #include <defines.h>
 
+#include "Resource.h"
+
 namespace OranGE {
 
 enum class TextureFormat {
@@ -76,7 +78,10 @@ struct TextureParams
 struct TextureData
 {
     const void* data;
-    u32 width, height;
+    u32 width, height, numChannels;
+
+    TextureData(u32 width, u32 height, u32 numChannels, const void* data)
+        : width(width), height(height), numChannels(numChannels), data(data) {}
 };
 
 struct TextureView
@@ -86,6 +91,21 @@ struct TextureView
     TextureType type;
     PixelFormat format;
     u32 width, height;
+};
+
+typedef Handle<Texture> TextureHandle;
+
+class TextureManager : public HandleManager<Texture> 
+{
+public:
+    TextureManager(gfx::Device* device) : m_Device(device) {}
+    // Additional texture-specific management functions can be added here
+    // e.g. loading textures from files, generating mipmaps, etc.
+
+    Handle<Texture> LoadTextureFromFile(const char* filePath);
+
+private:
+    gfx::Device* m_Device; // for texture creation and resource management
 };
 
 

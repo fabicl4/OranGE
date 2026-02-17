@@ -10,11 +10,11 @@
 #include <render/Renderer.h>
 
 #include <resources/Resource.h>
+#include <resources/Shader.h>
+#include <resources/Texture.h>
+#include <resources/Mesh.h>
 
 namespace OranGE {
-
-// Forward declaration of Device class to avoid being included in main.cpp
-class Device;
 
 struct ApplicationConfig
 {
@@ -79,12 +79,12 @@ protected:
     Window* m_Window;       
     gfx::Renderer* m_Renderer;   // Issues rendering commands
     gfx::Device* m_Device;       // Owns GPU driver interface + capabilities
-    gfx::GLContext* m_Context;   // Logical OpenGL context for state management
+    //gfx::GLContext* m_Context;   // Logical OpenGL context for state management
 
     // Resource managers
-    //BufferManager m_BufferManager;
     ShaderManager* m_ShaderManager;
     TextureManager* m_TextureManager;
+    MeshManager* m_MeshManager;
 };
 
 };

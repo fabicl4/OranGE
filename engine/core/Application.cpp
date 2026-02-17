@@ -2,8 +2,8 @@
 
 #include "Log.h"
 
-#include "../renderer/Device.h"
-#include "../renderer/Renderer.h"
+#include <render/Device.h>
+#include <render/Renderer.h>
 
 namespace OranGE {
 
@@ -31,7 +31,10 @@ bool Application::Init() {
     m_CurrWindow->MakeContextCurrent();
 
     m_Device = new gfx::Device(/* enable validation= */true);
-    m_Device->Init(Window::GetGLLoadingFunction());
+    if (!m_Device->Init(Platform::GetGLLoadingFunction())) {
+        LOG_ERROR("[Application]Failed load GLAD");
+        return false;
+    }
 
     m_Renderer = new gfx::Renderer(m_Device, 
         gfx::Viewport{0,0, m_Config.width, m_Config.height}
@@ -40,6 +43,7 @@ bool Application::Init() {
     // create resource managers
     m_ShaderManager = new ShaderManager(m_Device);
     m_TextureManager = new TextureManager(m_Device);
+    m_MeshManager = new MeshManager(m_Device);
 
     //-------------------------------------------------------------------------
     // Set event callbacks
@@ -71,12 +75,18 @@ bool Application::Shutdown() {
 bool Application::Run() {
     if (!Init()) {
         LOG_ERROR("[Application]Could not initialize");
+        
         return false;
     }
 
+    LOG_TRACE("[Application]Entering main loop");
+
     // Load shaders and textures
 
-    OnCreate();
+    if (!OnCreate()) {
+        LOG_ERROR("[Application]Failed to create the user application");
+        return false;
+    }
 
     // start timer before entering the loop
     ResetTimer();
@@ -102,7 +112,9 @@ bool Application::Run() {
         m_Platform.PollEvents();
     }
 
-    OnDestroy();
+    if (!OnDestroy()) {
+        LOG_ERROR("[Application]Failed to destroy application the user application");
+    }
 
     return Shutdown();
     

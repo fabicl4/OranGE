@@ -3,9 +3,9 @@
 #include "defines.h"
 
 // Types
-#include "Shader.h"
-#include "Buffer.h"
-#include "Texture.h"
+#include "resources/Shader.h"
+#include "resources/Texture.h"
+#include "resources/Mesh.h"
 
 namespace OranGE::gfx {
 
@@ -17,7 +17,6 @@ struct Viewport
     uint32_t x, y;
     uint32_t width, height;
 };
-
 
 class Renderer
 {
@@ -34,8 +33,7 @@ public:
     void BeginFrame();
     void EndFrame();
 
-    void Submit(const Buffer& vertexBuffer, const Buffer& indexBuffer, const Shader& shader);
-    void Submit(const Buffer& vertexBuffer, const Shader& shader);
+    void Submit(const Mesh& mesh, const Shader& shader);
 
     // event handlers
     void OnWindowResize(uint32_t width, uint32_t height);
