@@ -33,6 +33,7 @@ void Renderer::BeginFrame()
 
 void Renderer::EndFrame()
 {
+    // TODO: Phase 2
     // Flush command buffers to the GPU
     // Present the frame (swap buffers, etc.)
     // Update frame stats (e.g. calculate frame time)

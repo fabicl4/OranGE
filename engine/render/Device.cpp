@@ -66,6 +66,8 @@ bool Device::Init(GLProcLoader glLoadingFunc)
 
     LOG_TRACE("[Device]Initialized OpenGL context successfully");
 
+    
+
     if (m_EnableValidation) {
         enableDebugging();
     }
@@ -272,6 +274,10 @@ void Device::SetVertexAttribute(
     u32 offset
     )
 {
+
+    LOG_TRACE("[Device::SetVertexAttribute] Setting vertex attribute {} with buffer ID {}, count {}, type {}, normalized {}, stride {}, offset {}",
+        attribIndex, buffer.id, size, type, normalized, stride, offset);
+
     glBindVertexArray(vao.id);
     glCheckError();
     glBindBuffer(GL_ARRAY_BUFFER, buffer.id);
@@ -282,7 +288,7 @@ void Device::SetVertexAttribute(
     glVertexAttribPointer(
         attribIndex, 
         size, 
-        type, 
+        GL_FLOAT, 
         normalized ? GL_TRUE : GL_FALSE, 
         stride,
         (const void*)offset

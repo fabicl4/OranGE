@@ -75,8 +75,7 @@ protected:
 
     Platform m_Platform;    // OS surface, events and window management
     Window* m_CurrWindow = nullptr;
-
-    Window* m_Window;       
+    
     gfx::Renderer* m_Renderer;   // Issues rendering commands
     gfx::Device* m_Device;       // Owns GPU driver interface + capabilities
     //gfx::GLContext* m_Context;   // Logical OpenGL context for state management

@@ -14,7 +14,6 @@ typedef OranGE::Handle<OranGE::gfx::Buffer> BufferHandle;
 
 namespace OranGE::gfx {
 
-
 class Device
 {
     using GLProcLoader = void* (*)(const char*);

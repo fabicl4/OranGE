@@ -34,6 +34,7 @@ public:
     void EndFrame();
 
     void Submit(const Mesh& mesh, const Shader& shader);
+    void Submit(const Mesh& mesh, const Shader& shader, const Texture& texture);
 
     // event handlers
     void OnWindowResize(uint32_t width, uint32_t height);

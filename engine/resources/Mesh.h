@@ -13,7 +13,7 @@ namespace OranGE {
 class VertexLayout {
 public:
 
-    enum class AttributeType {
+    enum class AttributeType : u32 { // TODO: Currently not all attribute types are supported!
         Float, Float2, Float3, Float4,
         Int, Int2, Int3, Int4,
         Mat3, Mat4,
@@ -21,12 +21,16 @@ public:
     };
     
     struct Attribute {
-        std::string name;
-        u32 type; // e.g. GL_FLOAT, GL_UNSIGNED_INT, etc.
+        char* name; // debug name
+
+        AttributeType type; // e.g. GL_FLOAT, GL_UNSIGNED_INT, etc.
         u32 count; // number of components (e.g. 3 for vec3)
         bool normalized; // whether integer types should be normalized to [0,1] or [-1,1]
         u32 size; // size in bytes of the element (count * sizeof(type))
         u32 offset; // byte offset from the start of the vertex
+
+        Attribute (char* _name, AttributeType _type, u32 _count, bool _normalized)
+            : name(_name), type(_type), count(_count), normalized(_normalized) {}
     };
 
     VertexLayout(const std::vector<Attribute>& attributes)
@@ -35,10 +39,14 @@ public:
         // Calculate offsets and total stride
         u32 offset = 0;
         for (auto& attr : m_Attributes) {
+            attr.size = GetSizeOfType(attr.type);
+
             attr.offset = offset;
             offset += attr.size;
         }
         m_Stride = offset;
+
+        LOG_TRACE("[VertexLayout] Created vertex layout with stride {} and {} attributes", m_Stride, m_Attributes.size());
     }
 
     const std::vector<Attribute>& GetAttributes() const { return m_Attributes; }
@@ -106,6 +114,11 @@ public:
 
     //Handle<Mesh> LoadMeshFromFile(const char* filePath);
     Handle<Mesh> CreateMesh(const MeshData& meshData);
+    
+    // Factory fucntions
+    MeshData CreateCube(float size = 1.0f);
+    //MeshData CreateSphere(float radius = 1.0f, unsigned int segments = 16, unsigned int rings = 16);
+    //MeshData CreatePlane(float width = 1.0f, float height = 1.0f);
 
     void DestroyMesh(const Handle<Mesh>& handle);
 

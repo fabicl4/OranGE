@@ -6,11 +6,12 @@
 
 namespace OranGE::gfx {
 
+// Binding target 
 enum class BufferUsage : u32 {
-    Vertex  = 1 << 0,
-    Index   = 1 << 1,
-    Uniform = 1 << 2,
-    Storage = 1 << 3,
+    Vertex  = 1 << 0, // VBO    -> GL_ARRAY_BUFFER
+    Index   = 1 << 1, // EBO    -> GL_ELEMENT_ARRAY_BUFFER
+    Uniform = 1 << 2, // UBO
+    Storage = 1 << 3, // SSBO
     CopySrc = 1 << 4,
     CopyDst = 1 << 5
 };
@@ -23,8 +24,7 @@ enum class MemoryType {
 
 struct Buffer
 {
-    u32 id;
-    u32 target; // GL_ARRAY_BUFFER, GL_ELEMENT_ARRAY_BUFFER, etc.
+    u32 id; // GPU Handle
 
     char* debugName = nullptr;
     BufferUsage usage;
@@ -42,6 +42,7 @@ struct VertexArray {
 struct BufferView
 {
     Buffer* buffer;
+    
     size_t offset;
     size_t size;
 };

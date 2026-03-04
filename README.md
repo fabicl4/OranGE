@@ -192,12 +192,10 @@ $ cmake .. && cmake --build .
 
 *Abstract OpenGL behind a clean API*
 
-- [ ] Renderer Front & Back separation
-- [ ] Buffer abstraction with vertex layouts
+- [x] Renderer Front & Back separation
+- [x] Buffer abstraction with vertex layouts
 - [ ] Texture abstraction (stb_image integration)
 - [ ] Shader system with file loading
-- [ ] Pipeline State Object (encapsulates OpenGL state)
-- [ ] State caching and lazy updates
 - [ ] Resource handles (not raw OpenGL IDs)
 - [ ] Resource Descriptors
 - [ ] Resource Views (Texture, buffers)
@@ -205,6 +203,8 @@ $ cmake .. && cmake --build .
 
 ### Phase 2: Command-Based Rendering
 
+- [ ] Pipeline State Object (encapsulates OpenGL state)
+- [ ] State caching and lazy updates
 - [ ] RenderCommand type hierarchy
 - [ ] CommandStream/CommandBuffer
 - [ ] Sort by material/shader/texture
@@ -215,9 +215,9 @@ $ cmake .. && cmake --build .
 
 *Efficient asset handling*
 
-- [ ] Structure **Mesh Data**
+- [ ] ~~Structure **Mesh Data**~~
 - [ ] Resources Lifetime
-- [ ] Texture and mesh loaders
+- [ ] ~~Texture and mesh loaders~~
 - [ ] Material system
 - [ ] Serialization for assets
 - [ ] Hot reloading for shaders

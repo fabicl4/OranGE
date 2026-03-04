@@ -62,12 +62,21 @@ bool Application::Init() {
 
 bool Application::Shutdown() {
     Log::Shutdown();
-    // platform shutdown will release windows and other resources
-    m_Platform.Shutdown();
+
+    // Release resouces
 
     // release renderer
+    //m_Renderer->Shutdown();
+
     // release device
+    //m_Device->Shutdown();
+
+
     // release window
+    delete m_CurrWindow;
+
+    m_Platform.Shutdown();
+
 
     return true;
 }

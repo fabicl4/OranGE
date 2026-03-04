@@ -34,16 +34,17 @@ protected:
             0.0f,  0.5f, 0.0f  // top   
         };
 
+        LOG_INFO("vertex data size: {} bytes", sizeof(vertices));
+
         int vertexCount = 3;
 
         OranGE::VertexLayout layout(
         {
             {
-                "vertices", //name
-                0,          //type
-                3 * sizeof(float), //size
-                0,          //offset
-                false, // isNormalized
+                "position",         // name
+                OranGE::VertexLayout::AttributeType::Float3, // type
+                3,                  // count
+                false,              // normalized
             },
         });
 
@@ -55,8 +56,6 @@ protected:
 
         m_Mesh = m_MeshManager->CreateMesh(meshData);
 
-        LOG_TRACE("[TestApp::OnCreate] Shader {} Generation {}; Mesh {} Generation {}", 
-            m_Shader.GetId(), m_Shader.GetGeneration(), m_Mesh.GetId(), m_Mesh.GetGeneration());
 
         if (!m_Shader.IsValid()) {
             LOG_ERROR("[TestApp::OnCreate] Failed to create shader");
