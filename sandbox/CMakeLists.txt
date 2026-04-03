@@ -1,17 +1,13 @@
-add_executable(myapp
-    main.cpp
-)
+cmake_minimum_required(VERSION 3.20)
+project(Sandbox LANGUAGES CXX)
 
-# Include directories for myapp
-target_include_directories(myapp PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}     # Sandbox headers if any
-)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Link core static library
-target_link_libraries(myapp PRIVATE core)
+add_executable(Sandbox src/main.cpp)
 
-# Optional: set linker flags
-set_target_properties(myapp PROPERTIES
-    LINK_FLAGS_DEBUG "/NODEFAULTLIB:LIBCMT"
-    LINK_FLAGS_RELEASE "/NODEFAULTLIB:LIBCMT"
+target_link_libraries(Sandbox PRIVATE OranGECore)
+
+target_include_directories(Sandbox PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/src     # Sandbox headers if any
 )
