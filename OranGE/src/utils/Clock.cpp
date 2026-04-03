@@ -1,6 +1,8 @@
-#include "Clock.h"
+#include <utils/Clock.h>
 
 #include <chrono>
+
+namespace OranGE {
 
 Clock::Clock()
     : m_startTime(0.0)
@@ -51,3 +53,5 @@ void Clock::Stop()
         m_stopped = TRUE;
     }
 }
+
+};

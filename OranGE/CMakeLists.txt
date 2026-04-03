@@ -1,7 +1,7 @@
 # OranGE/CMakeLists.txt
 
 cmake_minimum_required(VERSION 3.20)
-project(MyEngine LANGUAGES CXX)
+project(OranGECore LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -9,6 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Set output directories
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 # static library
 add_library(OranGECore STATIC)
@@ -27,7 +28,7 @@ target_include_directories(OranGECore
 )
 
 # PCH
-target_precompile_headers(MyEngineCore PUBLIC include/pch.h)
+target_precompile_headers(OranGECore PUBLIC include/pch.h)
 
 # external dependencies
 # ------------------------

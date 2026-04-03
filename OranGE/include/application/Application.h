@@ -1,6 +1,9 @@
 #pragma once
 
-#include <Core/types.h>
+#include <pch.h>
+
+#include <core/types.h>
+#include <core/Event.h>
 
 #include <utils/Clock.h> // time measurement helper
 
@@ -61,10 +64,7 @@ private:
     bool OnWindowResize(WindowResizeEvent& e);
 
 protected:
-    ApplicationConfig m_Config;
-    Platform m_Platform;
-
-    Window* m_CurrWindow = nullptr;
+    ApplicationConfig m_Config {};
 };
 
 };

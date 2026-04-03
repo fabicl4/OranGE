@@ -1,6 +1,8 @@
 #pragma once
 
-#include <defines.h>
+#include <core/types.h>
+
+namespace OranGE {
 
 class Clock
 {
@@ -27,5 +29,7 @@ private:
 	f64 m_elapsed;
 
 	bool m_stopped;
+};
+
 };
 

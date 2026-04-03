@@ -21,16 +21,6 @@ enum class EventType
     MouseMoved
 };
 
-enum EventCategory
-{
-    None = 0,
-    Application = 1 << 0,
-    Input       = 1 << 1,
-    Keyboard    = 1 << 2,
-    Mouse       = 1 << 3,
-    MouseButton = 1 << 4
-};
-
 // Base event class
 class Event {
 public:
@@ -43,7 +33,6 @@ public:
 
     virtual EventType GetEventType() const = 0;
     virtual const char* GetName() const = 0;
-    virtual int GetCategoryFlags() const = 0;
     virtual std::string ToString() const { return GetName(); }
 };
 
@@ -76,7 +65,6 @@ public:
 
     static EventType GetStaticType() { return EventType::WindowResize; }
     virtual EventType GetEventType() const override { return GetStaticType(); }
-    virtual int GetCategoryFlags() const override { return EventCategory::Application; }
     virtual const char* GetName() const override { return "WindowResizeEvent"; }
 
 private:
@@ -84,4 +72,4 @@ private:
     uint32_t m_Height;
 };
 
-}
+};

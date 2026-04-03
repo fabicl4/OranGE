@@ -29,7 +29,7 @@ bool Application::Run() {
     // start timer before entering the loop
     ResetTimer();
 
-    while (!m_CurrWindow->ShouldClose())
+    while (true)
     {
         // process input
 
@@ -39,8 +39,8 @@ bool Application::Run() {
         OnRender();
         OnUpdate(dt);
 
-        m_CurrWindow->SwapBuffers();
-        m_Platform.PollEvents();
+        // Swapbuffers
+        // Poll events
     }
 
     OnDestroy();
