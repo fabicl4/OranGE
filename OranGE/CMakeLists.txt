@@ -19,6 +19,7 @@ target_sources(OranGECore
         src/pch.cpp
         src/core/Log.cpp
         src/utils/Clock.cpp
+        src/platform/GLFWWindow.cpp
         src/application/Application.cpp
 )
 

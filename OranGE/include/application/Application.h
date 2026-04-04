@@ -4,12 +4,14 @@
 
 #include <core/types.h>
 #include <core/Event.h>
-
 #include <core/Log.h>
 
 #include <utils/Clock.h> // time measurement helper
 
 namespace OranGE {
+
+// Forward declarations
+class Window;
 
 struct ApplicationConfig
 {
@@ -67,6 +69,7 @@ private:
 
 protected:
     ApplicationConfig m_Config {};
+    Window* m_window = nullptr;
 };
 
 };
