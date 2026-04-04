@@ -7,13 +7,13 @@ Application::Application(const ApplicationConfig& config)
 {}
 
 bool Application::Init() {
-
+    Log::Initialize();
 
     return true;
 }
 
 bool Application::Shutdown() {
-
+    Log::Shutdown();
     return true;
 }
 
@@ -21,6 +21,8 @@ bool Application::Run() {
     if (!Init()) {
         return false;
     }
+
+    LOG_TRACE("Application started successfully.");
 
     // Load shaders and textures
 
@@ -42,6 +44,8 @@ bool Application::Run() {
         // Swapbuffers
         // Poll events
     }
+
+    LOG_TRACE("Application is shutting down.");
 
     OnDestroy();
 

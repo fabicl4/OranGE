@@ -59,3 +59,5 @@ target_link_libraries(OranGECore PUBLIC
 )
 
 # TODO: Add libs: Assimp, PhysFS, entt, Box2D, OpenAL, Tracy Profiler ...
+# TODO: Add tests and examples subdirectories
+# TODO: Add install rules
