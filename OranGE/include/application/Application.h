@@ -5,6 +5,8 @@
 #include <core/types.h>
 #include <core/Event.h>
 
+#include <core/Log.h>
+
 #include <utils/Clock.h> // time measurement helper
 
 namespace OranGE {
